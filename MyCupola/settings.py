@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import join
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -59,14 +60,16 @@ WSGI_APPLICATION = 'MyCupola.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'MyCupola',
-        'USER': 'root',
-        'PASSWORD': 'admin123',
-	'HOST': 'localhost',
-        'PORT': '3306',
+DATABASES = {
+	'default' : {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'MyCupola',
+		'USER': 'root',
+		'PASSWORD': 'admin123',
+		'HOST': 'localhost',
+		'PORT': '3306',
     }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
