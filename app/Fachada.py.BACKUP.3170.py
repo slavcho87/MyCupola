@@ -3,7 +3,9 @@ from app.models import *
 class Fachada(object):
 	""" Interacciona con la base de datos."""
 
+<<<<<<< HEAD
 
+=======
 	
 	def registrarUsuario(self, email, password ):
 		# si todo va bien return true, else false..
@@ -22,3 +24,5 @@ class Fachada(object):
 	def guardarPartida(self):
 
 	def getImagen(self, zoom, coord1, coord2):
+		
+>>>>>>> 795dea5ab74c783fbf8f707a9b46633883a11a22
