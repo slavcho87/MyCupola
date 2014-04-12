@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE html> 
+<html> 
+	<head> 
+		<title>Earth as Art: Planifica tus viajes</title>
+		<link rel="stylesheet" href="{% static "css/general.css" %}" />
+	</head> 
+	
+	<body> 
+		<header> 
+			Earth as Art: Mis imagenes
+		</header> 
+		
+		<section> 
+			<div id="izquierda">  
+				Aqui sale la lista de los albumes que tiene el usuario
+			</div>
+			
+			<div id="derecha">
+				Aqui sale la lista de las imagenes del album seleccionado de la izquierda
+			</div> 
+		</section> 
+	</body> 
+</html> 

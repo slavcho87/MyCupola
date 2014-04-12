@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<!DOCTYPE html> 
+<html> 
+	<head> 
+		<title>Earth as Art: Mis imagenes</title>
+		<link rel="stylesheet" href="{% static "css/general.css" %}" />
+	</head> 
+	
+	<body> 
+		<header> 
+			Earth as Art: Otros viejes e imagenes
+		</header> 
+		
+		<section> 
+			Aqui salen las imagenes que los usuarios han nominado para votaciones 
+		</section> 
+	</body> 
+</html> 
