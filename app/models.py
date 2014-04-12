@@ -13,7 +13,8 @@ class Usuario(models.Model):
     """Representa los usuarios de la base de datos"""
     email = models.CharField(max_length=30,primary_key=True)
     password = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=20)
     albumes = models.ManyToManyField(Album, blank=True)
     
-
+class MeGusta(models.Model):
+    usuario = models.ForeignKey(Usuario) 
+    imagen = models.ForeignKey(Imagen)
