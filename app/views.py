@@ -1,14 +1,15 @@
 from django.shortcuts import render
 import json
-from fachada import Fachada
+from Fachada import Fachada
 # Create your views here.
 
 class AtenderPeticiones(object):
     """docstring for AtenderPeticiones"""
     def __init__(self, arg):
         self.arg = arg
-        
-    def register(self, request):
+    
+    @staticmethod
+    def register(request):
         email = request.get('email', 'error')
         password = request.get('password', 'error')
 
@@ -24,11 +25,13 @@ class AtenderPeticiones(object):
             else:
                 return json.dumps({'registrado' : 'false'})
 
-    def login (self, request):
+    @staticmethod
+    def login (request):
         email = request.get('email', 'error')
         password = request.get('password', 'error')
 
-        if email=='error' or password == 'error':
+        #if email=='error' or password == 'error':
+        if True:
             return json.dumps({'login' : 'false'})
         else:
             fachada = Fachada()
@@ -40,28 +43,29 @@ class AtenderPeticiones(object):
             else:
                 return json.dumps({'login' : 'false'})
 
-
-    def crearAlbum (self, request):
+    @staticmethod
+    def crearAlbum (request):
         email = request.session['email']
         if not email:
             return json.dumps({'crear' :'error',
                 'descripcion':'no se encuentra email'})
         nombre_album = request.get('nombre_album')
         fachada = Fachada()
-        creado = fachada.crearAlbum(nombre_album)
+        creado = fachada.crearAlbum(email, nombre_album)
         if creado:
             return json.dumps({'crear' : 'ok'})
         else:
             return json.dumps({'crear' :'error',
                 'descripcion':'error con base de datos'})
 
-    def meGustaImagen(self, request):
+    @staticmethod
+    def meGustaImagen(request):
         email = request.session['email']
         if not email:
             return json.dumps({'votar' :'error',
                 'descripcion':'no se encuentra email'})
         fachada = Fachada()
-        votado = fachada.meGustaImagen()
+        votado = fachada.meGustaImagen(email)
         if votado:
             return json.dumps({'votar' :'ok',
                 'descripcion':'votado correctamente'})
@@ -69,7 +73,8 @@ class AtenderPeticiones(object):
             return json.dumps({'votar ' :'error',
                 'descripcion':'error con base de datos'})
 
-    def getImagen(self, request):
+    @staticmethod
+    def getImagen(request):
         email = request.session['email']
         if not email:
             return json.dumps({'getImagen' :'error',
@@ -86,4 +91,7 @@ class AtenderPeticiones(object):
             #llamar a lo de suavi.
             return None
 
+    @staticmethod
+    def index(request):
+        return render(request, 'app/tests/opacity.html')
     

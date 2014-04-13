@@ -1,0 +1,4 @@
+.leaflet-tile-loaded{
+	border: 1px solid #000;
+	opacity: 0.1;
+}
