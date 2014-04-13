@@ -18,11 +18,11 @@ class Fachada(object):
  
 	def login(self, email, password):
         """ Devuelve true si y solo si el usuario esta registrado"""
-        usuario = Usuario.objects.filter(email=email,password=password)
-        if not usuario:
-            return False
-        else: 
-            return True	
+		usuario = Usuario.objects.filter(email=email,password=password)
+		if not usuario:
+		    return False
+		else: 
+		    return True	
 
 	def crearAlbum(self, email, nombre_album):
         """ Devuelve true si y solo si el album nombre_album ha sido creado"""
@@ -42,8 +42,19 @@ class Fachada(object):
                 meGusta = MeGusta()
                 meGusta.usuario_set.add(usuario)
                 meGusta.imagen_set.add(imagen)
-                meGusta.save() 
+                meGusta.save()
  
+        def addImagen(self, email, url, album):
+        """ Inserta una imagen en en uno de los albumes de un usuario"""   
+            usuario = Usuario.objects.filter(email=email)
+            
+            
+
+        def getImagenes(self):
+        """Devuevle una lista con las 10 imagenes mejor valoradas"""
+            
+             
+
 	def guardarPartida(self):
                 
             
