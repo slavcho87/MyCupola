@@ -6,7 +6,7 @@ class Fachada(object):
     
     def registrarUsuario(self, email, password ):
         """ Devuelve true si y solo si el usuario ha sido registrado."""
-        usuario = Usuario.objects.filter(email=registroEmail)
+        usuario = Usuario.objects.filter(email=email)
         if not usuario:
             nuevoUsuario = Usuario()
             nuevoUsuario.email = email
@@ -18,19 +18,16 @@ class Fachada(object):
  
     def login(self, email, password):
         """ Devuelve true si y solo si el usuario esta registrado"""
-<<<<<<< HEAD
-		usuario = Usuario.objects.filter(email=email,password=password)
-		if not usuario:
-		    return False
-		else: 
-		    return True	
-=======
         usuario = Usuario.objects.filter(email=email,password=password)
         if not usuario:
             return False
         else: 
             return True 
->>>>>>> f4bbd746cd8345a352a05c9465e09f4b14cf128c
+        usuario = Usuario.objects.filter(email=email,password=password)
+        if not usuario:
+            return False
+        else: 
+            return True 
 
     def crearAlbum(self, email, nombre_album):
         """ Devuelve true si y solo si el album nombre_album ha sido creado"""
@@ -41,8 +38,7 @@ class Fachada(object):
             usuario.albumes_set.create(nombre = nombre_album)
         return True
 
-<<<<<<< HEAD
-	def meGustaImagen(self, email, url_imagen):
+    def meGustaImagen(self, email, url_imagen):
             usuario = Usuario.objects.filter(email=email)
             imagen = Imagen.objects.filter(direccion=url_imagen)
             if not usuario or not imagen:
@@ -53,19 +49,21 @@ class Fachada(object):
                 meGusta.imagen_set.add(imagen)
                 meGusta.save()
  
-        def addImagen(self, email, url, album):
+    def addImagen(self, email, url, album):
         """ Inserta una imagen en en uno de los albumes de un usuario"""   
-            usuario = Usuario.objects.filter(email=email)
+        usuario = Usuario.objects.filter(email=email)
             
             
 
-        def getImagenes(self):
+    def getImagenes(self):
         """Devuevle una lista con las 10 imagenes mejor valoradas"""
+        return False
             
              
 
-	def guardarPartida(self):
-=======
+    def guardarPartida(self):
+        return True
+
     def meGustaImagen(self, email, url_imagen):
         usuario = Usuario.objects.filter(email=email)
         imagen = Imagen.objects.filter(direccion=url_imagen)
@@ -76,9 +74,3 @@ class Fachada(object):
             meGusta.usuario_set.add(usuario)
             meGusta.imagen_set.add(imagen)
             meGusta.save() 
- 
-    def guardarPartida(self):
-        return True
->>>>>>> f4bbd746cd8345a352a05c9465e09f4b14cf128c
-                
-            

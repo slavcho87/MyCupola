@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 
     #url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', include('app.urls')),
-    url(r'^login$', include('app.urls')),
+    url(r'^mycupola/', include('app.urls')),
+    url(r'^mycupola/', include('app.urls')),
 )

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import json
 from Fachada import Fachada
+from django.http import HttpResponse
 # Create your views here.
 
 class AtenderPeticiones(object):
@@ -10,38 +11,37 @@ class AtenderPeticiones(object):
     
     @staticmethod
     def register(request):
-        email = request.get('email', 'error')
-        password = request.get('password', 'error')
+        email = request.GET.get('email', 'error')
+        password = request.GET.get('password', 'error')
 
         if email=='error' or password == 'error':
-            return json.dumps({'registrado' : 'false'})
+            return HttpResponse(json.dumps({'registrado' : 'false'}))
         else:
             fachada = Fachada()
             registrado = fachada.registrarUsuario(email, password)
             if registrado:
                 request.session['email'] = email
                 request.session['logged'] = 'true'
-                return json.dumps({'registrado' : 'true'})
+                return HttpResponse(json.dumps({'registrado' : 'true'}))
             else:
-                return json.dumps({'registrado' : 'false'})
+                return HttpResponse(json.dumps({'registrado' : 'false'}))
 
     @staticmethod
     def login (request):
-        email = request.get('email', 'error')
-        password = request.get('password', 'error')
-
-        #if email=='error' or password == 'error':
-        if True:
-            return json.dumps({'login' : 'false'})
+        email = request.GET.get('email', 'error')
+        password = request.GET.get('password', 'error')
+        #return HttpResponse(json.dumps({'login' : 'false'}))
+        if email=='error' or password == 'error':
+        #if True:
+            return HttpResponse(json.dumps({'login' : 'false'}))
         else:
             fachada = Fachada()
             logeado = fachada.login(email, password)
             if logeado:
                 request.session['email'] = email
-                request.session['logged'] = 'true'
-                return json.dumps({'login' : 'true'})
+                return HttpResponse(json.dumps({'login' : 'true'}))
             else:
-                return json.dumps({'login' : 'false'})
+                return HttpResponse(json.dumps({'login' : 'false'}))
 
     @staticmethod
     def crearAlbum (request):
@@ -53,10 +53,10 @@ class AtenderPeticiones(object):
         fachada = Fachada()
         creado = fachada.crearAlbum(email, nombre_album)
         if creado:
-            return json.dumps({'crear' : 'ok'})
+            return HttpResponse(json.dumps({'crear' : 'ok'}))
         else:
-            return json.dumps({'crear' :'error',
-                'descripcion':'error con base de datos'})
+            return HttpResponse(json.dumps({'crear' :'error',
+                'descripcion':'error con base de datos'}))
 
     @staticmethod
     def meGustaImagen(request):
@@ -67,26 +67,26 @@ class AtenderPeticiones(object):
         fachada = Fachada()
         votado = fachada.meGustaImagen(email)
         if votado:
-            return json.dumps({'votar' :'ok',
-                'descripcion':'votado correctamente'})
+            return HttpResponse(json.dumps({'votar' :'ok',
+                'descripcion':'votado correctamente'}))
         else:
-            return json.dumps({'votar ' :'error',
-                'descripcion':'error con base de datos'})
+            return HttpResponse(json.dumps({'votar ' :'error',
+                'descripcion':'error con base de datos'}))
 
     @staticmethod
     def getImagen(request):
         email = request.session['email']
         if not email:
-            return json.dumps({'getImagen' :'error',
-                'descripcion':'no estas logeado'})
+            return HttpResponse(json.dumps({'getImagen' :'error',
+                'descripcion':'no estas logeado'}))
 
         zoom = request.get('val0', 'error')
         coord1 = request.get('val1','error')
         coord2 = request.get('val2','error')
 
         if zoom == 'error' or coord1 == 'error' or coord2 == 'error':
-            return json.dumps({'getImagen' :'error',
-                'descripcion':'no estas logeado'})
+            return HttpResponse(son.dumps({'getImagen' :'error',
+                'descripcion':'no estas logeado'}))
         else:
             #llamar a lo de suavi.
             return None
