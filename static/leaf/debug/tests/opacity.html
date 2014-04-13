@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet debug page</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="../../dist/leaflet.css" />
+	<link rel="stylesheet" href="../css/mobile.css" />
+	<style>
+		.mybox {
+			background-color: red;
+		}
+
+	</style>
+	<script type="text/javascript" src="../../build/deps.js"></script>
+	<script type="text/javascript" src="../jquery-2.1.0.min.js"></script>
+	<script src="../leaflet-include.js"></script>
+</head>
+<body>
+
+	<div id="map"></div>
+	<div id="photo"></div>
+
+	<script type="text/javascript">
+
+	//	var osmUrl = 'http://a.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'
+			var osmUrl = 'http://map1.vis.earthdata.nasa.gov/wmts-geo/MODIS_Terra_CorrectedReflectance_TrueColor/default/2012-07-09/EPSG4326_250m/{z}/{y}/{x}.jpg'
+			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			osm = L.tileLayer(osmUrl, {maxZoom: 4, minZoom: 4, attribution: osmAttrib}),
+			latlng = new L.LatLng(50.5, 30.51);
+
+		var map = new L.Map('map', {center: latlng, zoom: 4, layers: [osm]});
+
+	</script>
+	<script type="text/javascript">
+
+	$( document ).ready(function() {
+			$(document).on( "click", ".leaflet-tile-loaded", function() {
+				var url=$(this).attr('src');
+				var splits = url.split('/');
+				var zoom=splits[8];
+				var row=splits[9];
+				var col=splits[10].split('.')[0];
+				console.log("You're in "+zoom+" "+row+" "+col);
+				$(this).css("opacity","1.0"); 
+				value=Math.floor(Math.random() * 4) + 1;
+				console.log(value);
+				if(value==1){ // Izquierda
+					console.log("Izquierda");
+ 					col--;
+					//val1--;
+				}else if(value==2) { //Derecha
+					console.log("Derecha");
+					col++;
+					//val1++;
+				}else if(value==3) { //Arriba
+					console.log("Arriba");
+                      			row--;
+					//val2--;
+				}else { //Abajo (value = 4)
+					console.log("Abajo");
+					row++;	
+					//val2++;
+				}
+				//console.log("call "+val0+" "+val1+" "+ val2);
+				var new_zoom= 1+zoom.value;
+				var new_col= col*2;
+				var new_row =row*2;
+				console.log("http://map1.vis.earthdata.nasa.gov/wmts-geo/MODIS_Terra_CorrectedReflectance_TrueColor/default/2012-07-09/EPSG4326_250m/5/"+new_row+"/"+new_col+".jpg");
+
+      }); 
+});
+	</script>
+</body>
+</html>
